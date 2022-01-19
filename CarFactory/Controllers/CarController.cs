@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using CarFactory_Domain;
 using CarFactory_Factory;
@@ -26,7 +27,6 @@ namespace CarFactory.Controllers
         [HttpPost]
         public object Post([FromBody][Required] BuildCarInputModel carsSpecs)
         {
-
             var wantedCars = TransformToDomainObjects(carsSpecs);
             //Build cars
             var stopwatch = new Stopwatch();
@@ -53,14 +53,16 @@ namespace CarFactory.Controllers
                     {
                         throw new ArgumentException("Must give an odd number of doors");
                     }
+
                     PaintJob? paint = null;
                     var baseColor = Color.FromName(spec.Specification.Paint.BaseColor);
+
                     switch (spec.Specification.Paint.Type)
                     {
                         case "single":
                             paint = new SingleColorPaintJob(baseColor);
                             break;
-                        case "strie":
+                        case "stripe":
                             paint = new StripedPaintJob(baseColor, Color.FromName(spec.Specification.Paint.StripeColor));
                             break;
                         case "dot":
@@ -69,6 +71,7 @@ namespace CarFactory.Controllers
                         default:
                             throw new ArgumentException(string.Format("Unknown paint type %", spec.Specification.Paint.Type));
                     }
+
                     var dashboardSpeakers = spec.Specification.FrontWindowSpeakers.Select(s => new CarSpecification.SpeakerSpecification { IsSubwoofer = s.IsSubwoofer });
                     var doorSpeakers = new CarSpecification.SpeakerSpecification[0]; //TODO: Let people install door speakers
                     var wantedCar = new CarSpecification(paint, spec.Specification.Manufacturer, spec.Specification.NumberOfDoors, doorSpeakers, dashboardSpeakers);
