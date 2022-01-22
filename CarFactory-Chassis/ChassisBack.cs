@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CarFactory_Chasis
 {
-    public class ChassisBack : ChassisPart
+    public class ChassisBack : ChassisPart, IChassisDoorInstallable
     {
+        public int DoorAmount { get; private set; } = 0;
+
         public ChassisBack(int typeId) : base(typeId)
         {}
 
@@ -31,5 +33,24 @@ namespace CarFactory_Chasis
             return "ChassisBack";
         }
 
+        public void InstallDoor()
+        {
+            if (!AnotherDoorInstallable())
+            {
+                throw new InvalidOperationException("This cabin type does not support the installation of another door");
+            }
+
+            DoorAmount++;
+        }
+
+        public bool AnotherDoorInstallable()
+        {
+            if(DoorAmount >= 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

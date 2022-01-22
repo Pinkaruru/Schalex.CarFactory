@@ -37,8 +37,13 @@ namespace CarFactory_Chasis
 
             var chassisWelder = new ChassisWelder();
 
-            chassisWelder.StartWeld(chassisParts[0]);
-            chassisWelder.ContinueWeld(chassisParts[1], numberOfDoors);
+            /*
+             * DevNotes: 
+             * As explained in the README.md, door installation was written under the assumption that the uneven number of doors is explained that one door is the trunk door
+             */
+
+            chassisWelder.StartWeld(chassisParts[0], 1);
+            chassisWelder.ContinueWeld(chassisParts[1], --numberOfDoors);
             chassisWelder.FinishWeld(chassisParts[2]);
  
             return chassisWelder.GetChassis();

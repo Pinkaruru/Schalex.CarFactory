@@ -12,13 +12,23 @@ namespace CarFactory_Chasis
         private ChassisPart _firstPart;
         private ChassisPart _secondPart;
         private ChassisPart _thirdPart;
-        public bool StartWeld(ChassisPart firstPart)
+        public bool StartWeld(ChassisPart firstPart, int numberOfDoors)
         {
             if(_firstPart == null)
             {
                 _firstPart = firstPart;
+            }
+
+            if(_firstPart is ChassisBack)
+            {
+                for (var i = 0; i != numberOfDoors; i++)
+                {
+                    ((ChassisBack)_firstPart).InstallDoor();
+                }
+
                 return true;
             }
+
             return false;
         }
 
@@ -27,12 +37,18 @@ namespace CarFactory_Chasis
             if (_secondPart == null)
             {
                 _secondPart = secondPart;
+            }
+
+            if (_secondPart is ChassisCabin)
+            {
+                for (var i = 0; i != numberOfDoors; i++)
+                {
+                    ((ChassisCabin)_secondPart).InstallDoor();
+                }
+
                 return true;
             }
-            for(var i = 0; i != numberOfDoors; i++)
-            {
-                //TODO-Planday: Weld door
-            }
+
             return false;
         }
 
@@ -58,9 +74,12 @@ namespace CarFactory_Chasis
                 isValid = true;
             }
 
-
             var description = _secondPart.GetChassisType()+ " " + _firstPart.GetChassisType() + " " + _thirdPart.GetChassisType();
-            return new Chassis(description, isValid);
+
+            // A type check has already happened at this point, which is why I am casting without checking here
+            var doorTotalAmount = ((ChassisBack)_firstPart).DoorAmount + ((ChassisCabin)_secondPart).DoorAmount;
+            
+            return new Chassis(description, isValid, doorTotalAmount);
         }
     }
 }
