@@ -68,7 +68,7 @@ namespace CarFactory_Chasis
 
             if (parts.Count < 3)
             {
-                throw new Exception("To many chassis parts");
+                throw new Exception("Too many chassis parts");
             }
         }
     }
