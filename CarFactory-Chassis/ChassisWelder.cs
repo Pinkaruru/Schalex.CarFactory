@@ -31,7 +31,7 @@ namespace CarFactory_Chasis
             }
             for(var i = 0; i != numberOfDoors; i++)
             {
-                //TODO: Weld door
+                //TODO-Planday: Weld door
             }
             return false;
         }

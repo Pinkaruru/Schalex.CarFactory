@@ -1,7 +1,9 @@
 ﻿using CarFactory_Domain;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 
 namespace CarFactory_Factory
 {
@@ -39,14 +41,40 @@ namespace CarFactory_Factory
             foreach(var spec in specs)
             {
                 var chassis = _chassisProvider.GetChassis(spec.Manufacturer, spec.NumberOfDoors);
+                var engine = _engineProvider.GetEngine(spec.Manufacturer); // TODO: optimize
+                var interior = _interiorProvider.GetInterior(spec); 
+                var wheels = _wheelProvider.GetWheels();
+                var car = _carAssembler.AssembleCar(chassis, engine, interior, wheels);
+                var paintedCar = _painter.PaintCar(car, spec.PaintJob); // TODO: optimize
+                cars.Add(paintedCar);
+            }
+            return cars;
+        }
+
+        public double GetAveragePaintPerformance(IEnumerable<CarSpecification> specs)
+        {
+            /*
+             * Original average between 2.3 and 3.0 with 100 iterations
+             */
+            long total = 0L;
+            var stopWatch = new Stopwatch();
+            foreach(var spec in specs)
+            {
+                var chassis = _chassisProvider.GetChassis(spec.Manufacturer, spec.NumberOfDoors);
                 var engine = _engineProvider.GetEngine(spec.Manufacturer);
                 var interior = _interiorProvider.GetInterior(spec);
                 var wheels = _wheelProvider.GetWheels();
                 var car = _carAssembler.AssembleCar(chassis, engine, interior, wheels);
-                var paintedCar = _painter.PaintCar(car, spec.PaintJob);
-                cars.Add(paintedCar);
+
+                stopWatch.Start();
+                _painter.PaintCar(car, spec.PaintJob);
+                stopWatch.Stop();
+
+                total =+ stopWatch.ElapsedMilliseconds;
+                stopWatch.Reset();
             }
-            return cars;
+
+            return (double) total / specs.Count();
         }
     }
 }

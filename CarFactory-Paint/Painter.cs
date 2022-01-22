@@ -48,5 +48,24 @@ namespace CarFactory_Paint
             while (PaintJob.EncodeString(str) != encodedPassword) str = CreateRandomString();
             return str;
         }
+
+        private static string FindPaintPasswordPerm(int passwordLength, long encodedPassword)
+        {
+            var rd = new Random();
+            string CreateRandomString()
+            {
+                char[] chars = new char[passwordLength];
+
+                for (int i = 0; i < passwordLength; i++)
+                {
+                    chars[i] = PaintJob.ALLOWED_CHARACTERS[rd.Next(0, PaintJob.ALLOWED_CHARACTERS.Length)];
+                }
+
+                return new string(chars);
+            }
+            string str = CreateRandomString();
+            while (PaintJob.EncodeString(str) != encodedPassword) str = CreateRandomString();
+            return str;
+        }
     }
 }

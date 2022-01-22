@@ -13,6 +13,9 @@ namespace CarFactory_Chasis
         {
             _typeId = typeId;
         }
+
+        // TODO: Add a new class inherited from Chassispart that can hold the doors (see chassisprovider.cs to weld doors)
+
         public new abstract string GetType();
 
         public abstract string GetChassisType();
