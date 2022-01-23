@@ -1,8 +1,6 @@
 ﻿using CarFactory_Domain;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 
 namespace CarFactory_Factory
@@ -15,7 +13,6 @@ namespace CarFactory_Factory
         private IInteriorProvider _interiorProvider;
         private IWheelProvider _wheelProvider;
         private ICarAssembler _carAssembler;
-        private IStorageProvider _storageProvider;
 
         public CarFactory(
             IChassisProvider chassisProvider, 
@@ -23,8 +20,7 @@ namespace CarFactory_Factory
             IPainter painter, 
             IInteriorProvider interiorProvider, 
             IWheelProvider wheelProvider, 
-            ICarAssembler carAssembler,
-            IStorageProvider storageProvider)
+            ICarAssembler carAssembler)
         {
             _chassisProvider = chassisProvider;
             _engineProvider = engineProvider;
@@ -32,7 +28,6 @@ namespace CarFactory_Factory
             _interiorProvider = interiorProvider;
             _wheelProvider = wheelProvider;
             _carAssembler = carAssembler;
-            _storageProvider = storageProvider;
         }
 
         public IEnumerable<Car> BuildCars(IEnumerable<CarSpecification> specs)

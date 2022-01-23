@@ -1,14 +1,12 @@
 ﻿using CarFactory.Utilities;
 using CarFactory_Domain;
 using CarFactory_Domain.Engine;
-using CarFactory_Domain.Engine.EngineSpecifications;
 using CarFactory_Factory;
 using CarFactory_Storage;
 using CarFactory_SubContractor;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Linq;
-using System.Threading;
 
 namespace CarFactory_Engine
 {
@@ -27,6 +25,8 @@ namespace CarFactory_Engine
             _steelSubContractor = steelSubContractor;
             _getEngineSpecification = getEngineSpecification ;
             _cache = cache;
+
+            //TODO: optimize by utilizing Cache https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-6.0
         }
 
 

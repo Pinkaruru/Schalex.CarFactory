@@ -5,13 +5,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using CarFactory_Domain;
 using CarFactory_Domain.Exceptions;
 using CarFactory_Factory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace CarFactory.Controllers
 {

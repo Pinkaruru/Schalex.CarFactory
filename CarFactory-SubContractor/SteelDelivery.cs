@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CarFactory_SubContractor
+﻿namespace CarFactory_SubContractor
 {
     public class SteelDelivery
     {

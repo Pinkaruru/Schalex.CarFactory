@@ -1,10 +1,8 @@
 ﻿using CarFactory_Factory;
 using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using CarFactory_Domain;
-using System.Threading;
 using CarFactory_Domain.Engine.EngineSpecifications;
 
 namespace CarFactory
