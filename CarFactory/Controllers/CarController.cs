@@ -56,6 +56,15 @@ namespace CarFactory.Controllers
                     Message = e.Message
                 });
             }
+            catch (Exception)
+            {
+                // I know. I added this as a dummy for global error handling
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ErrorModel 
+                { 
+                    StatusCode = (int)HttpStatusCode.InternalServerError,
+                    Message = "Sorry, something went wrong. It's not you, it's us. If you want, you can inform us about the problem at carfactory@planday.com."
+                });
+            }
         }
 
         private static IEnumerable<CarSpecification> TransformToDomainObjects(BuildCarInputModel carsSpecs)
