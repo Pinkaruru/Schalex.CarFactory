@@ -1,4 +1,5 @@
 ﻿using CarFactory_Domain;
+using CarFactory_Domain.Exceptions;
 using CarFactory_Factory;
 using CarFactory_Storage;
 using CarFactory_SubContractor;
@@ -23,6 +24,11 @@ namespace CarFactory_Chasis
         public Chassis GetChassis(Manufacturer manufacturer, int numberOfDoors)
         {
             var chassisRecipe = _chassisRecipeQuery.Get(manufacturer);
+
+            if (chassisRecipe == null)
+            {
+                throw new EntityNotFoundException($"Unable to produce cars by manufacturer { manufacturer }");
+            }
 
             var chassisParts = new List<ChassisPart>();
             chassisParts.Add(new ChassisBack(chassisRecipe.BackId));

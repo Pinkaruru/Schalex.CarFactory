@@ -71,12 +71,14 @@ namespace CarFactory
             InsertChassisRecipe(conn, Manufacturer.PlanfaRomeo, 2, 50, 1, 75, 0, 50);
             InsertChassisRecipe(conn, Manufacturer.PlandayMotorWorks, 1, 60, 0, 75, 1, 75);
             InsertChassisRecipe(conn, Manufacturer.AstonPlanday, 0, 100, 1, 75, 0, 75);
+            InsertChassisRecipe(conn, Manufacturer.Volksday, 1, 60, 1, 75, 1, 75);
 
             InsertEngineSpecification(conn, Manufacturer.AstonPlanday, new GasolineV12());
             InsertEngineSpecification(conn, Manufacturer.Planborghini, new GasolineV12());
             InsertEngineSpecification(conn, Manufacturer.PlandayMotorWorks, new DieselStraight4());
             InsertEngineSpecification(conn, Manufacturer.Plandrover, new GasolineV8());
             InsertEngineSpecification(conn, Manufacturer.PlanfaRomeo, new GasolineV6());
+            InsertEngineSpecification(conn, Manufacturer.Volksday, new DieselStraight4());
 
         }
 

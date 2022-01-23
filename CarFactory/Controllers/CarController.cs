@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using CarFactory_Domain;
+using CarFactory_Domain.Exceptions;
 using CarFactory_Factory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,21 +29,33 @@ namespace CarFactory.Controllers
         [HttpPost]
         public object Post([FromBody][Required] BuildCarInputModel carsSpecs)
         {
-            var wantedCars = TransformToDomainObjects(carsSpecs);
+            try
+            {
+                var wantedCars = TransformToDomainObjects(carsSpecs);
 
-            //var result = _carFactory.GetAveragePaintPerformance(wantedCars);
-            
-            //Build cars
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var cars = _carFactory.BuildCars(wantedCars);
-            stopwatch.Stop();
+                //var result = _carFactory.GetAveragePaintPerformance(wantedCars);
 
-            //Create response and return
-            return new BuildCarOutputModel {
-                Cars = cars,
-                RunTime = stopwatch.ElapsedMilliseconds
-            };
+                //Build cars
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                var cars = _carFactory.BuildCars(wantedCars);
+                stopwatch.Stop();
+
+                //Create response and return
+                return new BuildCarOutputModel
+                {
+                    Cars = cars,
+                    RunTime = stopwatch.ElapsedMilliseconds
+                };
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(new ErrorModel
+                {
+                    StatusCode = (int)HttpStatusCode.NotFound,
+                    Message = e.Message
+                });
+            }
         }
 
         private static IEnumerable<CarSpecification> TransformToDomainObjects(BuildCarInputModel carsSpecs)
@@ -122,6 +136,12 @@ namespace CarFactory.Controllers
         public class BuildCarOutputModel{
             public long RunTime { get; set; }
             public IEnumerable<Car> Cars { get; set; }
+        }
+
+        public class ErrorModel
+        {
+            public int StatusCode { get; set; }
+            public string Message { get; set; }
         }
     }
 }

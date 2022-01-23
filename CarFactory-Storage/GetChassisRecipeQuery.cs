@@ -29,7 +29,7 @@ namespace CarFactory_Storage
                 recipes.Add(new ChassisRecipe((Manufacturer)rdr.GetInt32(1), rdr.GetInt32(2), rdr.GetInt32(3), rdr.GetInt32(4), rdr.GetInt32(5), rdr.GetInt32(6), rdr.GetInt32(7)));
             }
 
-            return recipes.First(x => x.Manufacturer == manufacturer);
+            return recipes.FirstOrDefault(x => x.Manufacturer == manufacturer);
         }
     }
 }
