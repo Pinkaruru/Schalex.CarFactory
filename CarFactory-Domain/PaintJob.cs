@@ -10,6 +10,7 @@ namespace CarFactory_Domain
     public abstract class PaintJob
     {
         public const string ALLOWED_CHARACTERS = "abcdefghijkmnopqrstuvwxyz0123456789";
+        public string Description { get; set; }
         private bool IsUnlocked = false;
         private readonly string Solution;
         public PaintJob()
