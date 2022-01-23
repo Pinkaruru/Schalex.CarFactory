@@ -17,6 +17,7 @@ namespace CarFactory_Domain
         {
             Solution = CreateString(PuzzleAnswerLength());
         }
+
         public (int, long) CreateInstructions()
         {
             return (PuzzleAnswerLength(), EncodeString(Solution));
@@ -42,6 +43,8 @@ namespace CarFactory_Domain
             return result.ToString().GetHashCode();
         }
 
+        public abstract string GetDescription();
+
         private static string CreateString(int stringLength)
         {
             var rd = new Random(((int) DateTime.Now.Ticks)/5*5);
@@ -62,9 +65,15 @@ namespace CarFactory_Domain
         public SingleColorPaintJob(Color color) : base()
         {
             Color = color;
+            Description = GetDescription();
         }
 
         protected override int PuzzleAnswerLength() => 2;
+
+        public override string GetDescription()
+        {
+            return Color.Name + " base";
+        }
     }
 
     public class StripedPaintJob : PaintJob
@@ -75,9 +84,15 @@ namespace CarFactory_Domain
         {
             BaseColor = baseCol;
             StripeColor = stripeCol;
+            Description = GetDescription();
         }
 
         protected override int PuzzleAnswerLength() => 4;
+
+        public override string GetDescription()
+        {
+            return BaseColor.Name + " base with " + StripeColor.Name + " stripes";
+        }
     }
 
     public class DottedPaintJob : PaintJob
@@ -88,8 +103,14 @@ namespace CarFactory_Domain
         {
             BaseColor = baseCol;
             DotColor = dotCol;
+            Description = GetDescription();
         }
 
         protected override int PuzzleAnswerLength() => 3;
+
+        public override string GetDescription()
+        {
+            return BaseColor.Name + " base with " + DotColor.Name + " dots";
+        }
     }
 }
