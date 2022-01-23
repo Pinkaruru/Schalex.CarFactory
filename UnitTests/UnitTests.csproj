@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Moq" Version="4.16.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
@@ -16,8 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarFactory-Assembly\CarFactory-Assembly.csproj" />
+    <ProjectReference Include="..\CarFactory-Chassis\CarFactory-Chassis.csproj" />
     <ProjectReference Include="..\CarFactory-Domain\CarFactory-Domain.csproj" />
     <ProjectReference Include="..\CarFactory-Engine\CarFactory-Engine.csproj" />
+    <ProjectReference Include="..\CarFactory-Interior\CarFactory-Interior.csproj" />
     <ProjectReference Include="..\CarFactory-Paint\CarFactory-Paint.csproj" />
     <ProjectReference Include="..\CarFactory-Wheels\CarFactory-Wheels.csproj" />
   </ItemGroup>

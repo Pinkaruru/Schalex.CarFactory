@@ -3,9 +3,6 @@ Due to my own time constraints I was limited to work on this coding challenge on
 
 - The number of doors is unequal as the trunk door is counted among them, I implemented door welding accordingly in ChassisWelder.cs
 
-# Remarks
-1. I opted out of DeveloperExceptionPage in the Development environment so the ErrorController gets used in Dev Environment instead. Just swap lines 82 and 83 in Startup.cs in case you need the DeveloperExceptionPage for the review.
-
 # The Planday car factory
 
 ![A very fast looking car](planborgini.png)
