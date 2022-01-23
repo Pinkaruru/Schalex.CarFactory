@@ -29,9 +29,12 @@ The factory is currently in a broken state and won't even compile. Your job is t
 
 ### Tasks
 Please finish as many of these tasks as you can, but if you feel like making changes to other areas of the code, please feel free to do so.
-1. In the CarFactory folder, you will find the solution file, CarFactory.sln. Open this
-2. The start-up project should be CarFactory. Fix the compile errors, and run this project. This should open up a Swagger page on https://localhost:44329/index.html
-3. Use the POST /Car endpoint to request the cars mentioned in the above section and make sure the code is working, fixing any errors you come across
+
+[x] = Considered handled
+
+1. [x] In the CarFactory folder, you will find the solution file, CarFactory.sln. Open this
+2. [x] The start-up project should be CarFactory. Fix the compile errors, and run this project. This should open up a Swagger page on https://localhost:44329/index.html
+3. [x] Use the POST /Car endpoint to request the cars mentioned in the above section and make sure the code is working, fixing any errors you come across
 4. Bill from quality insurance has been complaining we don’t have any tests to cover these new specs.
 Write some unit tests to cover these different car specs where you find it appropriate.
 5. Customer support get a lot of requests regarding paintjobs because peoples' phones changes the "type" for paintjob to have an uppercased letter, e.g. "Stripe", and our system doesn't allow that. Extend the system to support mixed casings, and write appropriate unit tests
