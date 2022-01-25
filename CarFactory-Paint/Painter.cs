@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CarFactory_Domain;
 using CarFactory_Factory;
 
@@ -47,25 +48,37 @@ namespace CarFactory_Paint
             string str = CreateRandomString();
             while (PaintJob.EncodeString(str) != encodedPassword) str = CreateRandomString();
             return str;
+
+            //var test = new char[passwordLength];
+
+            //for(int i = 0; i < test.Length; i++)
+            //{
+            //    test[i] = PaintJob.ALLOWED_CHARACTERS[0];
+            //}
+
+            //var solution = RecursivePermutation(passwordLength - 1, test, encodedPassword);
+            //return solution;
         }
 
-        private static string FindPaintPasswordPerm(int passwordLength, long encodedPassword)
+        private static string RecursivePermutation(int index, char[] password, long encodedPassword)
         {
-            var rd = new Random();
-            string CreateRandomString()
+            for(int i = 0; i < PaintJob.ALLOWED_CHARACTERS.Length; i++)
             {
-                char[] chars = new char[passwordLength];
+                password[index] = PaintJob.ALLOWED_CHARACTERS[i];
 
-                for (int i = 0; i < passwordLength; i++)
+                var str = new string(password);
+                if(PaintJob.EncodeString(str) == encodedPassword)
                 {
-                    chars[i] = PaintJob.ALLOWED_CHARACTERS[rd.Next(0, PaintJob.ALLOWED_CHARACTERS.Length)];
+                    return new string(password);
                 }
 
-                return new string(chars);
+                if(index > 0)
+                {
+                    RecursivePermutation(index - 1, password, encodedPassword);
+                }
             }
-            string str = CreateRandomString();
-            while (PaintJob.EncodeString(str) != encodedPassword) str = CreateRandomString();
-            return str;
+
+            return new string(password);
         }
     }
 }
