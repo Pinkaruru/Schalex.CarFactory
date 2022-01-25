@@ -60,7 +60,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void EngineProvider_GetEngine()
+        public void GetEngine_ShouldNotBeNull()
         {
             // Arrange
             var manufacturer = Manufacturer.Planborghini;
@@ -75,11 +75,42 @@ namespace UnitTests
                 .Setup(query => query.GetForManufacturer(manufacturer))
                 .Returns(engineSpecification);
 
+            _getPistonsMock
+                .Setup(query => query.Get(engineSpecification.CylinderCount))
+                .Returns(engineSpecification.CylinderCount);
+
             // Act
-
-
+            var result = _engineProvider.GetEngine(Manufacturer.Planborghini);
 
             // Assert
+            result.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void GetEngine_EngineShouldBeFinished()
+        {
+            // Arrange
+            var manufacturer = Manufacturer.Planborghini;
+            var engineSpecification = new EngineSpecification
+            {
+                CylinderCount = 6,
+                Name = "Gasoline V6",
+                PropulsionType = Propulsion.Gasoline
+            };
+
+            _getEngineSpecificationQueryMock
+                .Setup(query => query.GetForManufacturer(manufacturer))
+                .Returns(engineSpecification);
+
+            _getPistonsMock
+                .Setup(query => query.Get(engineSpecification.CylinderCount))
+                .Returns(engineSpecification.CylinderCount);
+
+            // Act
+            var result = _engineProvider.GetEngine(Manufacturer.Planborghini);
+
+            // Assert
+            result.IsFinished.Should().BeTrue();
         }
     }
 }
