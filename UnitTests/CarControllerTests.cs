@@ -28,14 +28,14 @@ namespace UnitTests
             _carController = new CarController(_carFactoryMock.Object, domainModelProvider);
         }
 
-        [TestMethod]
-        public void Post_()
-        {
-            // Arrange
+        //[TestMethod]
+        //public void Post_()
+        //{
+        //    // Arrange
 
-            // Act
+        //    // Act
 
-            // Assert
-        }
+        //    // Assert
+        //}
     }
 }

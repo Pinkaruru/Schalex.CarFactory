@@ -1,6 +1,7 @@
 ﻿using CarFactory.Utilities;
 using CarFactory_Domain;
 using CarFactory_Domain.Engine;
+using CarFactory_Domain.Engine.EngineSpecifications;
 using CarFactory_Factory;
 using CarFactory_Storage;
 using CarFactory_SubContractor;
@@ -31,7 +32,7 @@ namespace CarFactory_Engine
 
         public Engine GetEngine(Manufacturer manufacturer)
         {
-            var specification = _getEngineSpecification.GetForManufacturer(manufacturer);
+            var specification = GetEngineSpecificationFromCache(manufacturer);
                    
             var engineBlock = MakeEngineBlock(specification.CylinderCount);
 
@@ -106,6 +107,24 @@ namespace CarFactory_Engine
                 SlowWorker.FakeWorkingForMillis(engine.EngineBlock.CylinderCount * 15);
                 engine.HasSparkPlugs = true;
             }   
+        }
+
+        private EngineSpecification GetEngineSpecificationFromCache(Manufacturer manufacturer)
+        {
+            //var specification = _getEngineSpecification.GetForManufacturer(manufacturer);
+            EngineSpecification? specification = null;
+            string specificationKey = $"engine_specification_{(int)manufacturer}";
+
+            specification = _cache.Get<EngineSpecification>(specificationKey);
+
+            if (specification is null)
+            {
+                specification = _getEngineSpecification.GetForManufacturer(manufacturer);
+
+                _cache.Set(specificationKey, specification, new MemoryCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1.0), Size = 1 });
+            }
+
+            return specification;
         }
     }
 }

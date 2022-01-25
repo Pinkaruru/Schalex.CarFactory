@@ -111,10 +111,10 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void FinishWeld_ShouldReturnFalse_WhenGivenChassisFront()
+        public void FinishWeld_ShouldReturnFalse_WhenGivenChassisBack()
         {
             // Arrange
-            var chassisPart = new ChassisFront(0);
+            var chassisPart = new ChassisBack(0);
 
             // Act
             var result = _chassisWelder.FinishWeld(chassisPart);

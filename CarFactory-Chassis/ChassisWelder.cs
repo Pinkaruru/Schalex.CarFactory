@@ -50,11 +50,17 @@ namespace CarFactory_Chasis
 
         public bool FinishWeld(ChassisPart thirdPart)
         {
+            if (thirdPart is not ChassisFront)
+            {
+                return false;
+            }
+
             if (_thirdPart == null)
             {
                 _thirdPart = thirdPart;
                 return true;
             }
+
             return false;
         }
 
