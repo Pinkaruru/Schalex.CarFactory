@@ -6,6 +6,5 @@ namespace CarFactory_Factory
     public interface ICarFactory
     {
         IEnumerable<Car> BuildCars(IEnumerable<CarSpecification> specs);
-        double GetAveragePaintPerformance(IEnumerable<CarSpecification> specs);
     }
 }

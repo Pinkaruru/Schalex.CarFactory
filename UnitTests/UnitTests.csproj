@@ -24,6 +24,7 @@
     <ProjectReference Include="..\CarFactory-Interior\CarFactory-Interior.csproj" />
     <ProjectReference Include="..\CarFactory-Paint\CarFactory-Paint.csproj" />
     <ProjectReference Include="..\CarFactory-Wheels\CarFactory-Wheels.csproj" />
+    <ProjectReference Include="..\CarFactory\CarFactory.csproj" />
   </ItemGroup>
 
 </Project>

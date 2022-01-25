@@ -45,31 +45,5 @@ namespace CarFactory_Factory
             }
             return cars;
         }
-
-        public double GetAveragePaintPerformance(IEnumerable<CarSpecification> specs)
-        {
-            /*
-             * Original average between 2.3 and 3.0 with 100 iterations
-             */
-            long total = 0L;
-            var stopWatch = new Stopwatch();
-            foreach(var spec in specs)
-            {
-                var chassis = _chassisProvider.GetChassis(spec.Manufacturer, spec.NumberOfDoors);
-                var engine = _engineProvider.GetEngine(spec.Manufacturer);
-                var interior = _interiorProvider.GetInterior(spec);
-                var wheels = _wheelProvider.GetWheels();
-                var car = _carAssembler.AssembleCar(chassis, engine, interior, wheels);
-
-                stopWatch.Start();
-                _painter.PaintCar(car, spec.PaintJob);
-                stopWatch.Stop();
-
-                total =+ stopWatch.ElapsedMilliseconds;
-                stopWatch.Reset();
-            }
-
-            return (double) total / specs.Count();
-        }
     }
 }

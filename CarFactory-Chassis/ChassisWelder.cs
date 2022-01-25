@@ -64,6 +64,7 @@ namespace CarFactory_Chasis
             {
                 throw new Exception("Chassis not finished");
             }
+
             var isValid = false;
             if(_firstPart.GetType() == "ChassisBack" && _secondPart.GetType() == "ChassisCabin" && _thirdPart.GetType() == "ChassisFront")
             {

@@ -45,8 +45,8 @@ namespace UnitTests
         public void BuildCar_MustNotBeNull()
         {
             // Arrange
-            var specs = GetValidSpecs(1);
-            var spec = specs.Single();
+            var spec = GetValidSpec();
+            var specs = new List<CarSpecification>() { spec };
             var chassis = new Chassis("", true, 0);
             var engine = new Engine(new EngineBlock(10), "Test");
             var interior = new Interior();
@@ -73,8 +73,8 @@ namespace UnitTests
         public void BuildCar_MustBeExactAmountAsRequested()
         {
             // Arrange
-            var specs = GetValidSpecs(1);
-            var spec = specs.First();
+            var spec = GetValidSpec();
+            var specs = new List<CarSpecification>() { spec, GetValidSpec() };
             var chassis = new Chassis("", true, 0);
             var engine = new Engine(new EngineBlock(10), "Test");
             var interior = new Interior();
@@ -97,9 +97,8 @@ namespace UnitTests
             result.Count().Should().Be(specs.Count());
         }
 
-        private IEnumerable<CarSpecification> GetValidSpecs(int amount)
+        private CarSpecification GetValidSpec()
         {
-            var specs = new List<CarSpecification>();
             var paintJob = new StripedPaintJob(Color.FromName("red"), Color.FromName("white"));
             var doorSpeakers = new List<CarSpecification.SpeakerSpecification>
                                         {
@@ -112,12 +111,7 @@ namespace UnitTests
                                            new CarSpecification.SpeakerSpecification { IsSubwoofer = true }
                                         };
 
-            for (int i = 0; i < amount; i++)
-            {
-                specs.Add(new CarSpecification(paintJob, Manufacturer.Plandrover, 5, doorSpeakers, dashboardSpeakers));
-            }
-
-            return specs;
+            return new CarSpecification(paintJob, Manufacturer.Plandrover, 5, doorSpeakers, dashboardSpeakers);
         }
     }
 }

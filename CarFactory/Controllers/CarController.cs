@@ -31,8 +31,6 @@ namespace CarFactory.Controllers
             {
                 var wantedCars = TransformToDomainObjects(carsSpecs);
 
-                //var result = _carFactory.GetAveragePaintPerformance(wantedCars);
-
                 //Build cars
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
