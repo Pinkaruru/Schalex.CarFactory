@@ -10,7 +10,6 @@ namespace CarFactory_Assembly
     public class CarAssembler : ICarAssembler
     {
         /*
-         * 
          * When working with this file, please do not 
          * modify existing logic in the constructor nor the CalibrateLocks method
          */

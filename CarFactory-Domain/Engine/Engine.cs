@@ -19,7 +19,7 @@ namespace CarFactory_Domain.Engine
 
         public bool HasSparkPlugs { get; set; }
 
-        public bool IsFinished => PropulsionType.HasValue && PistonsCount.HasValue && 
+        public bool IsFinished => PropulsionType.HasValue && PistonsCount.HasValue && PistonsCount.Value > 0 &&
             (PropulsionType != Propulsion.Gasoline || HasSparkPlugs);
     }
 }

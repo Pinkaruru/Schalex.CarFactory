@@ -40,7 +40,7 @@ namespace CarFactory_Domain
             return result.ToString().GetHashCode();
         }
 
-        public abstract string GetDescription();
+        protected abstract string GetDescription();
 
         private static string CreateString(int stringLength)
         {
@@ -67,7 +67,7 @@ namespace CarFactory_Domain
 
         protected override int PuzzleAnswerLength() => 2;
 
-        public override string GetDescription()
+        protected override string GetDescription()
         {
             return Color.Name + " base";
         }
@@ -86,7 +86,7 @@ namespace CarFactory_Domain
 
         protected override int PuzzleAnswerLength() => 4;
 
-        public override string GetDescription()
+        protected override string GetDescription()
         {
             return BaseColor.Name + " base with " + StripeColor.Name + " stripes";
         }
@@ -105,7 +105,7 @@ namespace CarFactory_Domain
 
         protected override int PuzzleAnswerLength() => 3;
 
-        public override string GetDescription()
+        protected override string GetDescription()
         {
             return BaseColor.Name + " base with " + DotColor.Name + " dots";
         }

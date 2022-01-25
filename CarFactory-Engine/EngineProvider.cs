@@ -29,11 +29,10 @@ namespace CarFactory_Engine
             //TODO: optimize by utilizing Cache https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-6.0
         }
 
-
         public Engine GetEngine(Manufacturer manufacturer)
         {
             var specification = _getEngineSpecification.GetForManufacturer(manufacturer);
-                        
+                   
             var engineBlock = MakeEngineBlock(specification.CylinderCount);
 
             var engine = new Engine(engineBlock, specification.Name);
@@ -108,7 +107,5 @@ namespace CarFactory_Engine
                 engine.HasSparkPlugs = true;
             }   
         }
-
-
     }
 }

@@ -14,5 +14,16 @@ namespace UnitTests
         {
             _interiorProvider = new InteriorProvider(new DashboardBuilder(), new SeatBuilder(), new SpeakerBuilder());
         }
+
+        [TestMethod]
+        public void GetInterior()
+        {
+            // Arrange
+
+            // Act
+
+            // Assert
+
+        }
     }
 }

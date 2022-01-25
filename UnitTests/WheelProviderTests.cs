@@ -22,7 +22,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void WheelProvider_GetWheels_ShouldBeExactly4Wheels()
+        public void GetWheels_ShouldBeExactly4Wheels()
         {
             // Arrange
             var parts = new List<Part>
@@ -46,7 +46,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void WheelProvider_GetWheels_ShouldHaveSameManufacturerAsRubber()
+        public void GetWheels_ShouldHaveSameManufacturerAsRubber()
         {
             // Arrange
             var rubberManufacturer = Manufacturer.Volksday;

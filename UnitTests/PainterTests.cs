@@ -11,7 +11,7 @@ namespace UnitTests
     public class PainterTests
     {
         [TestMethod]
-        public void Painter_PaintJobTest()
+        public void PaintJobTest()
         {
             var singleColor = new SingleColorPaintJob(Color.Aqua);
             var painter = new Painter();
