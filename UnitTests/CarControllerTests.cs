@@ -1,4 +1,6 @@
 ﻿using CarFactory.Controllers;
+using CarFactory.Models;
+using CarFactory.Services.Interfaces;
 using CarFactory_Domain;
 using CarFactory_Factory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,72 +17,25 @@ namespace UnitTests
     [TestClass]
     public class CarControllerTests
     {
+        /*
+         * Only if time still allows
+         */
         private readonly CarController _carController;
         private readonly Mock<ICarFactory> _carFactoryMock = new Mock<ICarFactory>();
 
-        public CarControllerTests()
+        public CarControllerTests(IDomainObjectProvider domainModelProvider)
         {
-            _carController = new CarController(_carFactoryMock.Object);
+            _carController = new CarController(_carFactoryMock.Object, domainModelProvider);
         }
 
         [TestMethod]
-        public void Post_PaintTypesShouldAcceptMixedCasing()
+        public void Post_()
         {
             // Arrange
-            var carSpecs = GetCarSpecsWithCustomColors("StRiPe", "BLUE", "whITE");
-
-
-            //_carFactoryMock.Setup(factory => factory.BuildCars()).Results();
 
             // Act
-            var cars = _carController.Post(carSpecs);
 
             // Assert
-        }
-
-        private BuildCarInputModel GetCarSpecsWithCustomColors(string type, string baseColor, string stripeColor = null, string dotColor = null)
-        {
-            var doorSpeakers = new SpeakerSpecificationInputModel[]
-                                    {
-                                        new SpeakerSpecificationInputModel
-                                        {
-                                            IsSubwoofer = true
-                                        }
-                                    };
-
-            var frontWindowSpeakers = new SpeakerSpecificationInputModel[]
-                                    {
-                                        new SpeakerSpecificationInputModel
-                                        {
-                                            IsSubwoofer = true
-                                        }
-                                    };
-
-            var carSpec = new BuildCarInputModelItem()
-            {
-                Amount = 1,
-                Specification = new CarSpecificationInputModel
-                {
-                    DoorSpeakers = doorSpeakers,
-                    FrontWindowSpeakers = frontWindowSpeakers,
-                    Manufacturer = Manufacturer.Plandrover,
-                    NumberOfDoors = 5,
-                    Paint = new CarPaintSpecificationInputModel
-                    {
-                        Type = type,
-                        BaseColor = baseColor,
-                        StripeColor = stripeColor,
-                        DotColor = dotColor,
-                    }
-                }
-            };
-
-            var cars = new List<BuildCarInputModelItem>();
-
-            return new BuildCarInputModel
-            {
-                Cars = new List<BuildCarInputModelItem>() { carSpec }
-            };
         }
     }
 }

@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using CarFactory.Services;
+using CarFactory.Services.Interfaces;
 using CarFactory_Assembly;
 using CarFactory_Chasis;
 using CarFactory_Engine;
@@ -49,6 +51,7 @@ namespace CarFactory
 
             services.AddSingleton<IMemoryCache, MemoryCache>();
 
+            services.AddScoped<IDomainObjectProvider, DomainObjectProvider>();
             services.AddTransient<ICarAssembler, CarAssembler>();
             services.AddScoped<IChassisProvider, ChassisProvider>();
             services.AddScoped<IEngineProvider, EngineProvider>();
