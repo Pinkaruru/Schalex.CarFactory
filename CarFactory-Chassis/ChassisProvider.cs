@@ -19,6 +19,7 @@ namespace CarFactory_Chasis
             _steelSubcontractor = steelSubcontractor;
             _chassisRecipeQuery = chassisRecipeQuery;
         }
+
         public Chassis GetChassis(Manufacturer manufacturer, int numberOfDoors)
         {
             var chassisRecipe = _chassisRecipeQuery.Get(manufacturer);
@@ -70,12 +71,12 @@ namespace CarFactory_Chasis
                 throw new Exception("No chassis parts");
             }
 
-            if (parts.Count > 3)
+            if (parts.Count < 3)
             {
                 throw new Exception("Chassis parts missing");
             }
 
-            if (parts.Count < 3)
+            if (parts.Count > 3)
             {
                 throw new Exception("Too many chassis parts");
             }
